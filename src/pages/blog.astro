@@ -14,11 +14,18 @@ const pageDescription =
                 <span class="base-icon">📄</span>
                 <span class="pen-icon">✍️</span>
             </span>
-            Bučkov blog
+            <span class="highlight">Bučkov</span> blog
         </h1>
         <p>
             Stories, adventures, and memorable moments with our energetic Bučko
         </p>
+        <div class="hero-paws" aria-hidden="true">
+            <span class="paw">🐾</span>
+            <span class="paw">🐾</span>
+            <span class="paw">🐾</span>
+            <span class="paw">🐾</span>
+            <span class="paw">🐾</span>
+        </div>
     </header>
 
     <main class="blog-main">
@@ -28,22 +35,86 @@ const pageDescription =
 
 <style>
     .blog-header {
-        background: var(--gradient-warm);
+        background: linear-gradient(
+            135deg,
+            var(--color-primary) 0%,
+            var(--color-primary-light) 100%
+        );
         color: white;
-        padding: var(--spacing-4xl) var(--spacing-lg);
+        padding: var(--spacing-5xl) var(--spacing-lg);
         text-align: center;
+        position: relative;
+        overflow: hidden;
+        border-bottom-left-radius: 60px 30px;
+        border-bottom-right-radius: 60px 30px;
+    }
+
+    .blog-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+        }
     }
 
     .blog-header h1 {
-        font-size: var(--font-size-5xl);
+        font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
         margin: 0 0 var(--spacing-md) 0;
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
         line-height: var(--line-height-tight);
         display: flex;
         align-items: center;
         justify-content: center;
         gap: var(--spacing-md);
+        position: relative;
+        z-index: 2;
     }
+
+    .highlight {
+        color: var(--color-accent);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        display: inline-block;
+    }
+
+    .hero-paws {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0.1;
+        font-size: var(--font-size-2xl);
+        animation: pawFloat 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pawFloat {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .paw:nth-child(2) { animation-delay: -1s; }
+    .paw:nth-child(3) { animation-delay: -2s; }
+    .paw:nth-child(4) { animation-delay: -3s; }
+    .paw:nth-child(5) { animation-delay: -4s; }
 
     .animated-icon {
         position: relative;

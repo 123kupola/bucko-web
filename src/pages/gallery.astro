@@ -12,10 +12,19 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
     <main class="gallery-page">
         <header class="gallery-header">
             <div class="container gallery-header-content">
-                <h1 class="page-title">Full Photo Collection</h1>
+                <h1 class="page-title">
+                    <span class="highlight">Bučko's</span> Full Photo Collection
+                </h1>
                 <p class="page-subtitle">
                     Enjoying every moment with {dogInfo.name}.
                 </p>
+            </div>
+            <div class="hero-paws" aria-hidden="true">
+                <span class="paw">🐾</span>
+                <span class="paw">🐾</span>
+                <span class="paw">🐾</span>
+                <span class="paw">🐾</span>
+                <span class="paw">🐾</span>
             </div>
         </header>
 
@@ -40,11 +49,40 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
     }
 
     .gallery-header {
-        background: linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 100%);
+        background: linear-gradient(
+            135deg,
+            var(--color-primary) 0%,
+            var(--color-primary-light) 100%
+        );
         color: white;
-        padding: var(--spacing-3xl) 0;
+        padding: var(--spacing-5xl) 0;
         text-align: center;
         margin-bottom: var(--spacing-3xl);
+        position: relative;
+        overflow: hidden;
+        border-bottom-left-radius: 60px 30px;
+        border-bottom-right-radius: 60px 30px;
+    }
+
+    .gallery-header::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+        }
     }
 
     .container {
@@ -61,11 +99,45 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
     }
 
     .page-title {
-        font-size: var(--font-size-4xl);
+        font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
         font-weight: var(--font-weight-extrabold);
-        margin-bottom: var(--spacing-sm);
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        margin-bottom: var(--spacing-md);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        line-height: var(--line-height-tight);
     }
+
+    .highlight {
+        color: var(--color-accent);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        display: inline-block;
+    }
+
+    .hero-paws {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0.1;
+        font-size: var(--font-size-2xl);
+        animation: pawFloat 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pawFloat {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .paw:nth-child(2) { animation-delay: -1s; }
+    .paw:nth-child(3) { animation-delay: -2s; }
+    .paw:nth-child(4) { animation-delay: -3s; }
+    .paw:nth-child(5) { animation-delay: -4s; }
 
     .page-subtitle {
         font-size: var(--font-size-lg);
