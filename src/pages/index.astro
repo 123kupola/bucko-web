@@ -1,0 +1,51 @@
+---
+import Layout from "../layouts/Layout.astro";
+import { dogInfo } from "../data/dog";
+import { featuredPhotos } from "../data/photos";
+import Hero from "../components/sections/Hero.astro";
+import DogInfo from "../components/DogInfo.astro";
+import PhotoGallery from "../components/PhotoGallery.astro";
+import FunFacts from "../components/sections/FunFacts.astro";
+import MemoryLane from "../components/sections/MemoryLane.astro";
+import CollectionStats from "../components/sections/CollectionStats.astro";
+import BlogSection from "../components/sections/Blog.astro";
+
+const pageTitle = `Meet ${dogInfo.name} - ${dogInfo.nickname}'s Beautiful Photo Collection`;
+const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogInfo.nickname}), a ${dogInfo.age} ${dogInfo.breed} captured in these amazing photos. See ${featuredPhotos.length} carefully selected moments that show ${dogInfo.name}'s personality and spirit!`;
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <Hero dogInfo={dogInfo} photoCount={featuredPhotos.length} />
+
+    <section id="about" class="section">
+        <DogInfo
+            name={dogInfo.name}
+            nickname={dogInfo.nickname}
+            breed={dogInfo.breed}
+            age={dogInfo.age}
+            personality={dogInfo.personality}
+            favoriteThings={dogInfo.favoriteThings}
+            photoUrl={dogInfo.photoUrl}
+            birthDate={dogInfo.birthDate}
+        />
+    </section>
+
+    <section id="gallery" class="section">
+        <PhotoGallery
+            photos={featuredPhotos}
+            title={`${dogInfo.name}'s Photo Gallery`}
+        />
+    </section>
+
+    <FunFacts dogName={dogInfo.name} />
+    <MemoryLane dogInfo={dogInfo} />
+    <CollectionStats featuredCount={featuredPhotos.length} totalCount={86} />
+
+    <BlogSection limit={3} />
+</Layout>
+
+<style>
+    .section {
+        scroll-margin-top: calc(var(--spacing-4xl) + var(--spacing-lg));
+    }
+</style>

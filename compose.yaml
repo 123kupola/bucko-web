@@ -1,0 +1,6 @@
+services:
+  bucko-web:
+    build: .
+    container_name: bucko-web
+    ports:
+      - "4321:4321"

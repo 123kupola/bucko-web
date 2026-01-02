@@ -1,0 +1,173 @@
+---
+import type { BlogPost as BlogPostType } from "../../data/blog";
+import { Image } from "astro:assets";
+
+interface Props {
+    post: BlogPostType;
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+---
+
+<article class="blog-post">
+    <header class="post-header">
+        <div class="post-meta">
+            <time class="post-date" datetime={post.date}>
+                📅 {formattedDate}
+            </time>
+            {post.author && <span class="post-author">👤 {post.author}</span>}
+        </div>
+        
+        <h1 class="post-title">{post.title}</h1>
+        
+        {post.tags && post.tags.length > 0 && (
+            <div class="post-tags">
+                {post.tags.map(tag => (
+                    <span class="tag">#{tag}</span>
+                ))}
+            </div>
+        )}
+    </header>
+
+    {post.featuredImage && (
+        <div class="post-featured-image">
+            <Image
+                src={post.featuredImage}
+                alt={post.title}
+                width={1200}
+                height={600}
+                class="featured-img"
+            />
+        </div>
+    )}
+
+    <div class="post-content" set:html={post.content} />
+    
+    <footer class="post-footer">
+        <a href="/blog" class="back-link">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M11 15l-5-5 5-5" />
+            </svg>
+            Back to Blog
+        </a>
+    </footer>
+</article>
+
+<style>
+    .blog-post {
+        max-width: 800px;
+        margin: 0 auto;
+        background: white;
+        padding: var(--spacing-4xl);
+        border-radius: var(--radius-2xl);
+        box-shadow: var(--shadow-md);
+    }
+
+    .post-header {
+        margin-bottom: var(--spacing-3xl);
+        text-align: center;
+    }
+
+    .post-meta {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-xl);
+        color: var(--color-text-light);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-md);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .post-title {
+        font-size: var(--font-size-5xl);
+        color: var(--color-secondary);
+        margin-bottom: var(--spacing-lg);
+        line-height: var(--line-height-tight);
+    }
+
+    .post-tags {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+    }
+
+    .tag {
+        background: var(--gradient-cool);
+        color: white;
+        padding: var(--spacing-xs) var(--spacing-md);
+        border-radius: var(--radius-full);
+        font-size: var(--font-size-sm);
+    }
+
+    .post-featured-image {
+        margin: 0 calc(var(--spacing-4xl) * -1) var(--spacing-3xl);
+        border-radius: 0;
+        overflow: hidden;
+        aspect-ratio: 16 / 9;
+    }
+
+    .featured-img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .post-content {
+        color: var(--color-text);
+        font-size: var(--font-size-lg);
+        line-height: var(--line-height-relaxed);
+    }
+
+    .post-content :global(p) {
+        margin-bottom: var(--spacing-xl);
+    }
+
+    .post-content :global(h2) {
+        color: var(--color-secondary);
+        margin: var(--spacing-3xl) 0 var(--spacing-lg);
+        font-size: var(--font-size-3xl);
+    }
+
+    .post-footer {
+        margin-top: var(--spacing-4xl);
+        padding-top: var(--spacing-2xl);
+        border-top: 1px solid var(--color-border);
+    }
+
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        color: var(--color-primary);
+        text-decoration: none;
+        font-weight: var(--font-weight-semibold);
+        transition: transform var(--transition-base);
+    }
+
+    .back-link:hover {
+        transform: translateX(-5px);
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .blog-post {
+            padding: var(--spacing-xl);
+            border-radius: 0;
+            box-shadow: none;
+        }
+
+        .post-featured-image {
+            margin: 0 calc(var(--spacing-xl) * -1) var(--spacing-2xl);
+        }
+
+        .post-title {
+            font-size: var(--font-size-3xl);
+        }
+    }
+</style>

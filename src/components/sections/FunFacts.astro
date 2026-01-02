@@ -1,0 +1,162 @@
+---
+interface Props {
+    dogName?: string;
+}
+
+const { dogName = "Bucko" } = Astro.props;
+
+const facts = [
+    {
+        icon: "🎾",
+        title: "Favorite Toy",
+        description:
+            "Loves playing with tennis ball and will play fetch for hours!",
+    },
+    {
+        icon: "🌟",
+        title: "Special Skill",
+        description: "Can shake hands and give high-fives!",
+    },
+    {
+        icon: "🎵",
+        title: "Music Lover",
+        description: "Enjoys listening to classical music while relaxing.",
+    },
+    {
+        icon: "🍖",
+        title: "Favorite Snack",
+        description:
+            "Absolutely loves coconut butter and will do anything for it!",
+    },
+];
+---
+
+<section class="fun-facts">
+    <div class="facts-container">
+        <h2 class="facts-title">Fun Facts About {dogName}</h2>
+        <div class="facts-grid" role="list">
+            {
+                facts.map((fact, index) => (
+                    <article class="fact-card" role="listitem" tabindex="0">
+                        <div class="fact-icon" aria-hidden="true">
+                            {fact.icon}
+                        </div>
+                        <h3>{fact.title}</h3>
+                        <p>{fact.description}</p>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style>
+    .fun-facts {
+        margin-bottom: var(--spacing-4xl);
+    }
+
+    .facts-container {
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-2xl);
+        padding: var(--spacing-3xl) var(--spacing-xl);
+        box-shadow: var(--shadow-lg);
+        max-width: var(--container-xl);
+        margin: 0 auto;
+    }
+
+    .facts-title {
+        text-align: center;
+        font-size: var(--font-size-4xl);
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-xl);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-tight);
+    }
+
+    .facts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: var(--spacing-xl);
+    }
+
+    .fact-card {
+        background: linear-gradient(
+            135deg,
+            var(--color-bg) 0%,
+            rgba(248, 246, 243, 1) 100%
+        );
+        border-radius: var(--radius-lg);
+        padding: var(--spacing-xl);
+        text-align: center;
+        transition:
+            transform var(--transition-base),
+            box-shadow var(--transition-base);
+        border: 2px solid transparent;
+        cursor: pointer;
+    }
+
+    .fact-card:hover {
+        transform: translateY(calc(var(--spacing-sm) * -1));
+        box-shadow: var(--shadow-xl);
+        border-color: var(--color-accent);
+    }
+
+    .fact-card:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+    }
+
+    .fact-icon {
+        font-size: var(--font-size-4xl);
+        margin-bottom: var(--spacing-md);
+        line-height: 1;
+    }
+
+    .fact-card h3 {
+        color: var(--color-primary);
+        margin-bottom: var(--spacing-md);
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    .fact-card p {
+        color: var(--color-text-light);
+        line-height: var(--line-height-relaxed);
+        margin: 0;
+        font-size: var(--font-size-base);
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .facts-container {
+            padding: var(--spacing-2xl) var(--spacing-lg);
+        }
+
+        .facts-title {
+            font-size: var(--font-size-3xl);
+        }
+
+        .facts-grid {
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-lg);
+        }
+
+        .fact-card {
+            padding: var(--spacing-lg);
+        }
+    }
+
+    @media (max-width: var(--breakpoint-sm)) {
+        .facts-grid {
+            grid-template-columns: 1fr;
+            gap: var(--spacing-md);
+        }
+
+        .fact-card {
+            padding: var(--spacing-md);
+        }
+
+        .fact-icon {
+            font-size: var(--font-size-3xl);
+        }
+    }
+</style>

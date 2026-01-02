@@ -1,0 +1,247 @@
+---
+import { Image } from "astro:assets";
+import type { DogInfo } from "../data/dog";
+import { calculateAge } from "../utils/dateUtils";
+
+interface Props {
+    name: string;
+    nickname?: string;
+    breed?: string;
+    age?: string;
+    favoriteThings?: string[];
+    personality?: string[];
+    photoUrl?: string;
+    birthDate?: string;
+}
+
+const {
+    name,
+    nickname,
+    breed,
+    age,
+    favoriteThings = [],
+    personality = [],
+    photoUrl = "/images/bucko-placeholder.jpg",
+    birthDate,
+} = Astro.props;
+
+const ageResult = birthDate ? calculateAge(birthDate) : null;
+
+const plural = (count: number, unit: string) => {
+    return `${count} ${unit}${count !== 1 ? "s" : ""}`;
+};
+---
+
+<article class="dog-info">
+    <div class="dog-photo">
+        <Image
+            src={photoUrl}
+            alt={`Photo of ${name}`}
+            width={300}
+            height={300}
+            loading="eager"
+            decoding="sync"
+            priority
+        />
+        <div class="photo-frame"></div>
+    </div>
+
+    <div class="dog-details">
+        <h1 class="dog-name">
+            {name}
+            {nickname && <span class="nickname">"{nickname}"</span>}
+        </h1>
+
+        <div class="basic-info">
+            {breed && <p class="breed">🐶 {breed}</p>}
+            {ageResult ? (
+                <p class="age">
+                    📅 <span class="age-unit age-years">{plural(ageResult.years, "year")}</span> | 
+                    <span class="age-unit age-months">{plural(ageResult.months, "month")}</span> | 
+                    <span class="age-unit age-days">{plural(ageResult.days, "day")}</span>
+                </p>
+            ) : age && (
+                <p class="age">📅 {age}</p>
+            )}
+        </div>
+
+        <div class="personality-section">
+            <h3>✨ Personality</h3>
+            <div class="traits">
+                {personality.map((trait) => <span class="trait">{trait}</span>)}
+            </div>
+        </div>
+
+        <div class="favorites-section">
+            <h3>🎾 Favorite Things</h3>
+            <ul class="favorites">
+                {favoriteThings.map((item) => <li>{item}</li>)}
+            </ul>
+        </div>
+    </div>
+</article>
+
+<style>
+    .dog-info {
+        display: grid;
+        grid-template-columns: 300px 1fr;
+        gap: 2rem;
+        align-items: start;
+        max-width: 1000px;
+        margin: 2rem auto;
+        padding: 2rem;
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+
+    @media (max-width: 768px) {
+        .dog-info {
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+            margin: 1rem;
+            padding: 1.5rem;
+        }
+    }
+
+    .dog-photo {
+        position: relative;
+        border-radius: 15px;
+        overflow: hidden;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .dog-photo img {
+        width: 100%;
+        height: 300px;
+        object-fit: cover;
+        display: block;
+    }
+
+    .photo-frame {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        border: 3px solid #8b4513;
+        border-radius: 15px;
+        pointer-events: none;
+    }
+
+    .dog-name {
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 0.5rem 0;
+        color: #2c3e50;
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .nickname {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #8b4513;
+        font-style: italic;
+    }
+
+    .basic-info {
+        display: flex;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .breed,
+    .age {
+        background: linear-gradient(45deg, #f39c12, #e67e22);
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 20px;
+        font-weight: 600;
+        margin: 0;
+        box-shadow: 0 2px 10px rgba(243, 156, 18, 0.3);
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+    }
+
+    .age-unit {
+        font-weight: 800;
+        text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+    }
+
+    .age-years {
+        color: #b5ff2b; /* Bright visible green */
+    }
+
+    .age-months {
+        color: #3fedff; /* Sky blue */
+    }
+
+    .age-days {
+        color: #ff9d6c; /* Warm coral/orange */
+    }
+
+    .personality-section,
+    .favorites-section {
+        margin-bottom: 2rem;
+    }
+
+    h3 {
+        color: #2c3e50;
+        font-size: 1.3rem;
+        font-weight: 700;
+        margin: 0 0 1rem 0;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+    }
+
+    .traits {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.8rem;
+    }
+
+    .trait {
+        background: linear-gradient(45deg, #3498db, #2980b9);
+        color: white;
+        padding: 0.4rem 1rem;
+        border-radius: 15px;
+        font-size: 0.9rem;
+        font-weight: 500;
+        box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+        transition: transform 0.2s ease;
+    }
+
+    .trait:hover {
+        transform: translateY(-2px);
+    }
+
+    .favorites {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 0.8rem;
+    }
+
+    .favorites li {
+        background: #ecf0f1;
+        padding: 0.8rem 1rem;
+        border-radius: 10px;
+        border-left: 4px solid #e74c3c;
+        font-weight: 500;
+        color: #2c3e50;
+        transition: all 0.2s ease;
+    }
+
+    .favorites li:hover {
+        background: #d5dbdb;
+        transform: translateX(5px);
+    }
+</style>

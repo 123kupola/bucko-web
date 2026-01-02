@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import BlogSection from "../components/sections/Blog.astro";
+
+const pageTitle = "Bucko's Blog - Stories & Adventures";
+const pageDescription =
+    "Read stories, adventures, and memorable moments with Bučko. A collection of blog posts celebrating our beloved American Bully!";
+---
+
+<Layout title={pageTitle} description={pageDescription}>
+    <header class="blog-header">
+        <h1>📝 Bucko's Blog</h1>
+        <p>
+            Stories, adventures, and memorable moments with our energetic Bučko
+        </p>
+    </header>
+
+    <main class="blog-main">
+        <BlogSection showAll={true} />
+    </main>
+</Layout>
+
+<style>
+    .blog-header {
+        background: var(--gradient-warm);
+        color: white;
+        padding: var(--spacing-4xl) var(--spacing-lg);
+        text-align: center;
+    }
+
+    .blog-header h1 {
+        font-size: var(--font-size-5xl);
+        margin: 0 0 var(--spacing-md) 0;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        line-height: var(--line-height-tight);
+    }
+
+    .blog-header p {
+        font-size: var(--font-size-xl);
+        margin: 0;
+        opacity: 0.95;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .blog-main {
+        max-width: var(--container-xl);
+        margin: 0 auto;
+        padding: var(--spacing-3xl) var(--spacing-lg);
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .blog-header {
+            padding: var(--spacing-3xl) var(--spacing-md);
+        }
+
+        .blog-header h1 {
+            font-size: var(--font-size-4xl);
+        }
+
+        .blog-header p {
+            font-size: var(--font-size-lg);
+        }
+
+        .blog-main {
+            padding: var(--spacing-2xl) var(--spacing-md);
+        }
+    }
+
+    @media (max-width: var(--breakpoint-sm)) {
+        .blog-header {
+            padding: var(--spacing-2xl) var(--spacing-md);
+        }
+
+        .blog-header h1 {
+            font-size: var(--font-size-3xl);
+        }
+
+        .blog-header p {
+            font-size: var(--font-size-base);
+        }
+
+        .blog-main {
+            padding: var(--spacing-xl) var(--spacing-md);
+        }
+    }
+</style>

@@ -1,0 +1,363 @@
+---
+import type { DogInfo } from "../../data/dog";
+
+interface Props {
+    dogInfo: DogInfo;
+    photoCount: number;
+}
+
+const { dogInfo, photoCount } = Astro.props;
+---
+
+<section class="hero" id="hero">
+    <div class="hero-content">
+        <h1 class="hero-title">
+            Welcome to <span class="highlight">{dogInfo.name}'s</span> World
+        </h1>
+        <p class="hero-subtitle">
+            Meet the most energetic dog who goes by both{" "}
+            <strong>{dogInfo.name}</strong> and{" "}
+            <strong>{dogInfo.nickname}</strong>
+        </p>
+        <div class="hero-animation" aria-hidden="true">
+            <div class="animation-stage">
+                <div class="ball" id="hero-ball"></div>
+                <div class="dog-container" id="hero-dog">
+                    <span class="dog-body">🐕</span>
+                    <span class="dog-tail">💨</span>
+                </div>
+            </div>
+        </div>
+        <div class="photo-count">
+            📸 Featuring {photoCount} carefully selected photos
+        </div>
+    </div>
+    <div class="hero-paws" aria-hidden="true">
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+        <span class="paw">🐾</span>
+    </div>
+</section>
+
+<style>
+    .hero {
+        background: linear-gradient(
+            135deg,
+            var(--color-primary) 0%,
+            var(--color-primary-light) 100%
+        );
+        color: white;
+        padding: var(--spacing-4xl) var(--spacing-lg);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        min-height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Ccircle cx='30' cy='30' r='4'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0) rotate(0deg);
+        }
+        50% {
+            transform: translateY(-20px) rotate(180deg);
+        }
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .hero-title {
+        font-size: clamp(var(--font-size-3xl), 5vw, var(--font-size-5xl));
+        font-weight: var(--font-weight-extrabold);
+        margin-bottom: var(--spacing-md);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        line-height: var(--line-height-tight);
+    }
+
+    .highlight {
+        color: var(--color-accent);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        display: inline-block;
+    }
+
+    .hero-subtitle {
+        font-size: var(--font-size-lg);
+        margin-bottom: var(--spacing-xl);
+        opacity: 0.95;
+        line-height: var(--line-height-relaxed);
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .hero-subtitle strong {
+        color: var(--color-accent);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    /* Animation Styles */
+    .hero-animation {
+        margin: var(--spacing-xl) 0;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .animation-stage {
+        position: relative;
+        width: 300px;
+        height: 100%;
+    }
+
+    .ball {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 24px;
+        height: 24px;
+        background: radial-gradient(circle at 30% 30%, #d4ff00, #a8cc00);
+        border: 2px solid rgba(255, 255, 255, 0.4);
+        border-radius: 50%;
+        z-index: 3;
+        transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), left 0.6s ease-in-out;
+        transform: translateX(-50%);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    }
+
+    .ball::after {
+        content: ")";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%) rotate(45deg);
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 20px;
+        font-family: Arial, sans-serif;
+        line-height: 0;
+        pointer-events: none;
+    }
+
+    .dog-container {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 80px;
+        height: 80px;
+        z-index: 2;
+        transform: translateX(-50%);
+        transition: left 0.6s ease-in-out, transform 0.3s ease-out;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .dog-body {
+        font-size: 60px;
+        position: relative;
+        z-index: 2;
+    }
+
+    .dog-tail {
+        position: absolute;
+        right: -10px;
+        bottom: 15px;
+        font-size: 24px;
+        transform-origin: left center;
+        animation: wiggle 0.4s ease-in-out infinite;
+        opacity: 0.7;
+    }
+
+    @keyframes wiggle {
+        0%, 100% { transform: rotate(-10deg); }
+        50% { transform: rotate(20deg); }
+    }
+
+    /* Animation States and Keyframes */
+    .is-jumping {
+        animation: jump 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes jump {
+        0%, 100% { transform: translateX(-50%) translateY(0) scale(1); }
+        50% { transform: translateX(-50%) translateY(-50px) scale(1.1); }
+    }
+
+    .ball-bouncing {
+        animation: ballBounce 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) infinite;
+    }
+
+    @keyframes ballBounce {
+        0%, 100% { bottom: 0; transform: translateX(-50%) scaleX(1.2) scaleY(0.8) rotate(0deg); }
+        50% { bottom: 60px; transform: translateX(-50%) scaleX(0.9) scaleY(1.1) rotate(180deg); }
+    }
+
+    .ball-rolling {
+        animation: ballRoll 0.6s linear infinite;
+    }
+
+    @keyframes ballRoll {
+        from { transform: translateX(-50%) rotate(0deg); }
+        to { transform: translateX(-50%) rotate(360deg); }
+    }
+
+    .photo-count {
+        font-size: var(--font-size-base);
+        background: rgba(255, 255, 255, 0.2);
+        padding: var(--spacing-sm) var(--spacing-lg);
+        border-radius: var(--radius-full);
+        display: inline-block;
+        backdrop-filter: blur(10px);
+        font-weight: var(--font-weight-medium);
+    }
+
+    .hero-paws {
+        position: absolute;
+        top: 50%;
+        width: 100%;
+        display: flex;
+        justify-content: space-around;
+        opacity: 0.1;
+        font-size: var(--font-size-2xl);
+        animation: pawFloat 8s ease-in-out infinite;
+        pointer-events: none;
+    }
+
+    @keyframes pawFloat {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-15px);
+        }
+    }
+
+    .paw:nth-child(2) {
+        animation-delay: -1s;
+    }
+
+    .paw:nth-child(3) {
+        animation-delay: -2s;
+    }
+
+    .paw:nth-child(4) {
+        animation-delay: -3s;
+    }
+
+    .paw:nth-child(5) {
+        animation-delay: -4s;
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .hero {
+            padding: var(--spacing-3xl) var(--spacing-md);
+            min-height: 400px;
+        }
+
+        .hero-paws {
+            display: none;
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-base);
+        }
+
+        .hero-animation {
+            height: 100px;
+        }
+    }
+
+    @media (max-width: var(--breakpoint-sm)) {
+        .hero-title {
+            font-size: var(--font-size-3xl);
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-sm);
+        }
+
+        .photo-count {
+            font-size: var(--font-size-sm);
+            padding: var(--spacing-xs) var(--spacing-md);
+        }
+    }
+</style>
+
+<script>
+    const dog = document.getElementById('hero-dog');
+    const ball = document.getElementById('hero-ball');
+    
+    let isAnimating = false;
+
+    function playAnimation() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const action = Math.random();
+        
+        if (action < 0.4) {
+            // Move ball and dog left/right
+            const side = Math.random() > 0.5 ? '20%' : '80%';
+            if (ball) {
+                ball.style.left = side;
+                ball.classList.add('ball-rolling');
+            }
+            
+            setTimeout(() => {
+                if (dog) dog.style.left = side;
+            }, 200);
+
+            setTimeout(() => {
+                if (ball) ball.classList.remove('ball-rolling');
+                isAnimating = false;
+            }, 1500);
+
+        } else if (action < 0.7) {
+            // High jump!
+            if (dog) dog.classList.add('is-jumping');
+            if (ball) {
+                ball.style.bottom = '80px';
+                setTimeout(() => { ball.style.bottom = '10px'; }, 300);
+            }
+
+            setTimeout(() => {
+                if (dog) dog.classList.remove('is-jumping');
+                isAnimating = false;
+            }, 1000);
+
+        } else {
+            // Pause and wiggle (done in CSS by default, just wait)
+            setTimeout(() => {
+                isAnimating = false;
+            }, 2000);
+        }
+    }
+
+    // Run animation logic periodically
+    setInterval(playAnimation, 3000);
+    
+    // Initial start
+    setTimeout(playAnimation, 1000);
+</script>

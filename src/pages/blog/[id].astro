@@ -1,0 +1,40 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogPost from "../../components/blog/BlogPost.astro";
+import { blogPosts, getPostById } from "../../data/blog";
+
+export function getStaticPaths() {
+    return blogPosts.map((post) => ({
+        params: { id: post.id },
+    }));
+}
+
+const { id } = Astro.params;
+const post = id ? getPostById(id) : undefined;
+
+if (!post) {
+    return Astro.redirect("/404");
+}
+
+const pageTitle = `${post.title} - Bucko's Blog`;
+---
+
+<Layout title={pageTitle} description={post.excerpt}>
+    <main class="post-page">
+        <BlogPost post={post} />
+    </main>
+</Layout>
+
+<style>
+    .post-page {
+        background-color: var(--color-bg);
+        padding: var(--spacing-4xl) 0;
+        min-height: 100vh;
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .post-page {
+            padding: 0;
+        }
+    }
+</style>

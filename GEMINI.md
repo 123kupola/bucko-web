@@ -1,0 +1,1 @@
+This is an Astro web framework project. The project name is "bucko-web". We will be running this in a container.

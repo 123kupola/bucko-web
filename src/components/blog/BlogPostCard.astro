@@ -1,0 +1,185 @@
+---
+import type { BlogPost } from '../../data/blog';
+import { Image } from 'astro:assets';
+
+interface Props {
+    post: BlogPost;
+}
+
+const { post } = Astro.props;
+
+const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric'
+});
+---
+
+<article class="blog-post-card">
+    {post.featuredImage && (
+        <div class="post-image">
+            <Image
+                src={post.featuredImage}
+                alt={post.title}
+                width={400}
+                height={250}
+                loading="lazy"
+            />
+        </div>
+    )}
+
+    <div class="post-content">
+        <time class="post-date" datetime={post.date} aria-label={`Published on ${formattedDate}`}>
+            📅 {formattedDate}
+        </time>
+
+        <h3 class="post-title">
+            <a href={`/blog/${post.id}`}>{post.title}</a>
+        </h3>
+
+        <p class="post-excerpt">{post.excerpt}</p>
+
+        {post.tags && post.tags.length > 0 && (
+            <div class="post-tags" aria-label="Post tags">
+                {post.tags.map(tag => (
+                    <span class="tag">#{tag}</span>
+                ))}
+            </div>
+        )}
+    </div>
+</article>
+
+<style>
+    .blog-post-card {
+        background: var(--color-bg-alt);
+        border-radius: var(--radius-lg);
+        overflow: hidden;
+        box-shadow: var(--shadow-sm);
+        transition: transform var(--transition-base), box-shadow var(--transition-base);
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+    }
+
+    .blog-post-card:hover {
+        transform: translateY(calc(var(--spacing-sm) * -1));
+        box-shadow: var(--shadow-lg);
+    }
+
+    .blog-post-card:focus-within {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+        border-radius: var(--radius-lg);
+    }
+
+    .post-image {
+        width: 100%;
+        aspect-ratio: 16 / 10;
+        overflow: hidden;
+    }
+
+    .post-image img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform var(--transition-slow);
+    }
+
+    .blog-post-card:hover .post-image img {
+        transform: scale(1.05);
+    }
+
+    .post-content {
+        padding: var(--spacing-xl);
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+    }
+
+    .post-date {
+        color: var(--color-text-light);
+        font-size: var(--font-size-sm);
+        margin-bottom: var(--spacing-sm);
+        display: block;
+        font-weight: var(--font-weight-medium);
+    }
+
+    .post-title {
+        margin-bottom: var(--spacing-md);
+    }
+
+    .post-title a {
+        color: var(--color-secondary);
+        text-decoration: none;
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-bold);
+        line-height: var(--line-height-tight);
+        transition: color var(--transition-fast);
+    }
+
+    .post-title a:hover {
+        color: var(--color-primary);
+    }
+
+    .post-title a:focus-visible {
+        outline: 2px solid var(--color-accent);
+        outline-offset: 2px;
+        border-radius: var(--radius-sm);
+    }
+
+    .post-excerpt {
+        color: var(--color-text-light);
+        line-height: var(--line-height-relaxed);
+        margin-bottom: var(--spacing-lg);
+        font-size: var(--font-size-base);
+    }
+
+    .post-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--spacing-sm);
+        margin-top: auto;
+    }
+
+    .tag {
+        background: var(--gradient-cool);
+        color: white;
+        padding: var(--spacing-xs) var(--spacing-md);
+        border-radius: var(--radius-full);
+        font-size: var(--font-size-sm);
+        font-weight: var(--font-weight-medium);
+        transition: transform var(--transition-fast);
+    }
+
+    .tag:hover {
+        transform: translateY(-1px);
+    }
+
+    @media (max-width: var(--breakpoint-md)) {
+        .post-content {
+            padding: var(--spacing-lg);
+        }
+
+        .post-title {
+            font-size: var(--font-size-lg);
+        }
+
+        .post-excerpt {
+            font-size: var(--font-size-sm);
+        }
+    }
+
+    @media (max-width: var(--breakpoint-sm)) {
+        .post-image {
+            aspect-ratio: 16 / 9;
+        }
+
+        .post-content {
+            padding: var(--spacing-md);
+        }
+
+        .post-title {
+            font-size: var(--font-size-base);
+        }
+    }
+</style>
