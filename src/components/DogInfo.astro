@@ -104,6 +104,18 @@ const plural = (count: number, unit: string) => {
         }
     }
 
+    @media (max-width: 480px) {
+        .dog-info {
+            padding: 1rem;
+            margin: 0.5rem;
+            gap: 1rem;
+        }
+
+        .dog-name {
+            font-size: 2rem;
+        }
+    }
+
     .dog-photo {
         position: relative;
         border-radius: 15px;
@@ -130,10 +142,10 @@ const plural = (count: number, unit: string) => {
     }
 
     .dog-name {
-        font-size: 3rem;
+        font-size: clamp(2rem, 8vw, 3rem);
         font-weight: 800;
         margin: 0 0 0.5rem 0;
-        color: #2c3e50;
+        color: var(--color-secondary);
         display: flex;
         flex-direction: column;
         gap: 0.5rem;
@@ -226,7 +238,7 @@ const plural = (count: number, unit: string) => {
         padding: 0;
         margin: 0;
         display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr));
         gap: 0.8rem;
     }
 

@@ -100,19 +100,15 @@
     --z-popover: 1060;
     --z-tooltip: 1070;
 
-    /* Layout */
+    /* Layout Settings (Use these values in media queries) */
     --container-sm: 640px;
     --container-md: 768px;
     --container-lg: 1024px;
     --container-xl: 1280px;
     --container-2xl: 1536px;
 
-    /* Breakpoints */
-    --breakpoint-sm: 640px;
-    --breakpoint-md: 768px;
-    --breakpoint-lg: 1024px;
-    --breakpoint-xl: 1280px;
-    --breakpoint-2xl: 1536px;
+    /* Breakpoints (Literal values to use in @media) */
+    /* XS: 480px, SM: 640px, MD: 768px, LG: 1024px, XL: 1280px */
 }
 
 /* Dark mode support */

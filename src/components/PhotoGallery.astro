@@ -381,7 +381,7 @@ const totalPhotos = photos.length;
     }
 
     /* Responsive */
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .gallery-grid {
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
             gap: var(--spacing-md);
@@ -428,7 +428,7 @@ const totalPhotos = photos.length;
         }
     }
 
-    @media (max-width: var(--breakpoint-sm)) {
+    @media (max-width: 640px) {
         .photo-gallery {
             padding: 0 var(--spacing-md);
         }
@@ -444,6 +444,18 @@ const totalPhotos = photos.length;
         .nav-btn {
             width: 40px;
             height: 40px;
+        }
+    }
+
+    /* Extra optimization for micro-screens */
+    @media (max-width: 320px) {
+        .photo-gallery {
+            padding: 0 var(--spacing-sm);
+            margin: var(--spacing-xl) auto;
+        }
+        
+        .gallery-grid {
+            gap: var(--spacing-sm);
         }
     }
 </style>
