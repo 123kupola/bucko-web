@@ -6,7 +6,7 @@ const quickLinks = [
     { href: "/", label: "Home" },
     { href: "/#about", label: "About" },
     { href: "/gallery", label: "Gallery" },
-    { href: "/#blog", label: "Blog" },
+    { href: "/blog", label: "Blog" },
 ];
 ---
 
@@ -138,6 +138,10 @@ const quickLinks = [
         display: flex;
         flex-direction: column;
         gap: var(--spacing-sm);
+    }
+
+    .quick-link-item {
+        margin-bottom: var(--spacing-xs);
     }
 
     .footer-link {
