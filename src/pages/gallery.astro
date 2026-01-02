@@ -11,7 +11,7 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
 <Layout title={pageTitle} description={pageDescription}>
     <main class="gallery-page">
         <header class="gallery-header">
-            <div class="container">
+            <div class="container gallery-header-content">
                 <h1 class="page-title">Full Photo Collection</h1>
                 <p class="page-subtitle">
                     Enjoying every moment with {dogInfo.name}. Total: {allPhotos.length} photos.
@@ -51,6 +51,13 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
         max-width: 1200px;
         margin: 0 auto;
         padding: 0 var(--spacing-lg);
+    }
+
+    .gallery-header-content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
     }
 
     .page-title {
