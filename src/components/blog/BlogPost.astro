@@ -6,9 +6,13 @@ interface Props {
     post: BlogPostType;
 }
 
-const { post } = Astro.props;
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
-const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const formattedDate = new Date(post.date).toLocaleDateString(lang === 'sl' ? "sl-SI" : "en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -50,11 +54,11 @@ const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
     <div class="post-content" set:html={post.content} />
     
     <footer class="post-footer">
-        <a href="/blog" class="back-link">
+        <a href={`/${lang}/blog`} class="back-link">
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M11 15l-5-5 5-5" />
             </svg>
-            Back to Blog
+            {t('blog.back')}
         </a>
     </footer>
 </article>

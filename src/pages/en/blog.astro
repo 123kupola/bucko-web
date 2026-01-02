@@ -1,13 +1,13 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import BlogSection from "../components/sections/Blog.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import BlogSection from "../../components/sections/Blog.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 
 const pageTitle = t('blog.title') + " - " + t('blog.description');
-const pageDescription = "Preberite zgodbe, dogodivščine in nepozabne trenutke z Bučkom. Zbirka objav na blogu, ki slavijo našega ljubljenega Ameriškega Bullyja!";
+const pageDescription = "Stories, adventures, and memorable moments with our beloved American Bully!";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -17,7 +17,7 @@ const pageDescription = "Preberite zgodbe, dogodivščine in nepozabne trenutke 
                 <span class="base-icon">📄</span>
                 <span class="pen-icon">✍️</span>
             </span>
-            <span class="highlight">Bučkov</span> blog
+            <span class="highlight">Bucko's</span> Blog
         </h1>
         <p>
             {t('blog.description')}

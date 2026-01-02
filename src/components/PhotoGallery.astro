@@ -7,8 +7,28 @@ interface Props {
     title?: string;
 }
 
-const { photos = [], title = "Photo Gallery" } = Astro.props;
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const { photos = [], title = t('gallery.title') } = Astro.props;
 const totalPhotos = photos.length;
+
+const getPhotoText = (count: number) => {
+    // English rules
+    if (lang === 'en') {
+        return `${count} ${t(`dog.age.year` /* using generic pluralizer if needed but here we need photo specifics */)}`;
+        // Actually lets just use the logic custom here or add photos to ui.ts keys
+    }
+     if (lang === 'en') {
+         return count === 1 ? 'photo' : 'photos';
+    }
+
+    if (count === 1) return "fotografija";
+    if (count === 2) return "fotografiji";
+    if (count >= 3 && count <= 4) return "fotografije";
+    return "fotografij";
+};
 ---
 
 <div class="photo-gallery">
@@ -47,8 +67,8 @@ const totalPhotos = photos.length;
             <div class="no-photos">
                 <div class="placeholder">
                     <div class="placeholder-icon">📷</div>
-                    <h3>No photos yet</h3>
-                    <p>Add photos to see the gallery!</p>
+                    <h3>{t('gallery.no_photos')}</h3>
+                    <p>{t('gallery.add_photos')}</p>
                 </div>
             </div>
         )
@@ -71,8 +91,8 @@ const totalPhotos = photos.length;
 >
     <div class="lightbox-backdrop"></div>
     <div class="lightbox-content">
-        <button class="close-btn" aria-label="Close lightbox" type="button">
-            <span class="sr-only">Close</span>
+        <button class="close-btn" aria-label={t('gallery.lightbox_close')} type="button">
+            <span class="sr-only">{t('gallery.lightbox_close')}</span>
             <svg
                 width="24"
                 height="24"
@@ -104,7 +124,7 @@ const totalPhotos = photos.length;
 
         <button
             class="nav-btn prev-btn"
-            aria-label="Previous photo"
+            aria-label={t('gallery.lightbox_prev')}
             type="button"
             disabled
         >
@@ -122,7 +142,7 @@ const totalPhotos = photos.length;
 
         <button
             class="nav-btn next-btn"
-            aria-label="Next photo"
+            aria-label={t('gallery.lightbox_next')}
             type="button"
             disabled
         >

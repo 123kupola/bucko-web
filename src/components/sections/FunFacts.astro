@@ -5,35 +5,39 @@ interface Props {
 
 const { dogName = "Bucko" } = Astro.props;
 
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const facts = [
     {
         icon: "🎾",
-        title: "Favorite Toy",
-        description:
-            "Loves playing with tennis ball and will play fetch for hours!",
+        title: lang === 'sl' ? "Priljubljena igrača" : "Favorite Toy",
+        description: lang === 'sl' ? "Obožuje igro s teniško žogico in prinašanje ure in ure!" : "Loves playing with tennis ball and will play fetch for hours!",
     },
     {
         icon: "🌟",
-        title: "Special Skill",
-        description: "Can shake hands and give high-fives!",
+        title: lang === 'sl' ? "Posebna veščina" : "Special Skill",
+        description: lang === 'sl' ? "Zna dati taco in 'high-five'!" : "Can shake hands and give high-fives!",
     },
     {
         icon: "🎵",
-        title: "Music Lover",
-        description: "Enjoys listening to classical music while relaxing.",
+        title: lang === 'sl' ? "Ljubitelj glasbe" : "Music Lover",
+        description: lang === 'sl' ? "Uživa v poslušanju klasične glasbe med sproščanjem." : "Enjoys listening to classical music while relaxing.",
     },
     {
         icon: "🍖",
-        title: "Favorite Snack",
-        description:
-            "Absolutely loves coconut butter and will do anything for it!",
+        title: lang === 'sl' ? "Najljubši prigrizek" : "Favorite Snack",
+        description: lang === 'sl' ? "Obožuje kokosovo maslo in bi naredil vse zanj!" : "Absolutely loves coconut butter and will do anything for it!",
     },
 ];
 ---
 
 <section class="fun-facts">
     <div class="facts-container">
-        <h2 class="facts-title">Fun Facts About {dogName}</h2>
+    <div class="facts-container">
+        <h2 class="facts-title">{t('facts.title')} {dogName}</h2>
         <div class="facts-grid" role="list">
             {
                 facts.map((fact, index) => (

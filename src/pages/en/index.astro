@@ -1,22 +1,22 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getDogInfo } from "../data/dog";
-import { featuredPhotos, allPhotos } from "../data/photos";
-import Hero from "../components/sections/Hero.astro";
-import DogInfo from "../components/DogInfo.astro";
-import PhotoGallery from "../components/PhotoGallery.astro";
-import FunFacts from "../components/sections/FunFacts.astro";
-import MemoryLane from "../components/sections/MemoryLane.astro";
-import CollectionStats from "../components/sections/CollectionStats.astro";
-import BlogSection from "../components/sections/Blog.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import { getDogInfo } from "../../data/dog";
+import { featuredPhotos, allPhotos } from "../../data/photos";
+import Hero from "../../components/sections/Hero.astro";
+import DogInfo from "../../components/DogInfo.astro";
+import PhotoGallery from "../../components/PhotoGallery.astro";
+import FunFacts from "../../components/sections/FunFacts.astro";
+import MemoryLane from "../../components/sections/MemoryLane.astro";
+import CollectionStats from "../../components/sections/CollectionStats.astro";
+import BlogSection from "../../components/sections/Blog.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const dogInfo = getDogInfo(lang);
 
-const pageTitle = `Spoznajte ${dogInfo.name}a - ${dogInfo.nickname}jeva čudovita zbirka fotografij`;
-const pageDescription = `Odkrijte čudoviti svet ${dogInfo.name}a (${dogInfo.nickname}), psa pasme ${dogInfo.breed}, ujetega v teh neverjetnih fotografijah. Oglejte si ${featuredPhotos.length} skrbno izbranih trenutkov, ki kažejo ${dogInfo.name}jevo osebnost in duh!`;
+const pageTitle = `Meet ${dogInfo.name} - ${dogInfo.nickname}'s Beautiful Photo Collection`;
+const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogInfo.nickname}), a ${dogInfo.breed} captured in these amazing photos. See ${featuredPhotos.length} carefully selected moments that show ${dogInfo.name}'s personality and spirit!`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -40,7 +40,7 @@ const pageDescription = `Odkrijte čudoviti svet ${dogInfo.name}a (${dogInfo.nic
             title={`${dogInfo.name}'s Photo Gallery`}
         />
         <div class="gallery-cta">
-            <a href="/gallery" class="view-all-button">
+            <a href={`/${lang}/gallery`} class="view-all-button">
                 <span>{t('gallery.view_all', { count: allPhotos.length })}</span>
                 <span class="icon">📸</span>
             </a>

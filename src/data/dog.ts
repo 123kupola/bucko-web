@@ -15,36 +15,66 @@ export interface DogInfo {
     name: string;
     nickname: string;
     breed: string;
-    age: string;
     birthDate: string;
     photoUrl: any;
     personality: string[];
     favoriteThings: string[];
 }
 
-export const dogInfo: DogInfo = {
+const baseDogInfo = {
     name: "Bučko",
     nickname: "Buks",
-    breed: "American Bully",
-    age: "11 months old",
     birthDate: "2024-12-01",
     photoUrl: getImagePath("/images/bucko-buks-004.jpg"),
-    personality: [
-        "Playful",
-        "Loving",
-        "Energetic",
-        "Friendly",
-        "Curious",
-        "Intelligent",
-    ],
-    favoriteThings: [
-        "Long walks in the park",
-        "Playing fetch",
-        "Cuddling on the couch",
-        "Meeting new people",
-        "Sunbathing",
-        "Treats and snacks",
-        "Swimming",
-        "Dog park adventures",
-    ],
 };
+
+export const dogInfo: Record<string, DogInfo> = {
+    en: {
+        ...baseDogInfo,
+        breed: "American Bully",
+        personality: [
+            "Playful",
+            "Loving",
+            "Energetic",
+            "Friendly",
+            "Curious",
+            "Intelligent",
+            "Sometimes stubborn"
+        ],
+        favoriteThings: [
+            "Playing fetch",
+            "Cuddling on the couch",
+            "Meeting new people",
+            "Sunbathing",
+            "Treats and snacks",
+            "Long walks in nature",
+            "Swimming"
+        ],
+    },
+    sl: {
+        ...baseDogInfo,
+        breed: "Ameriški Bully",
+        personality: [
+            "Igriv",
+            "Ljubeč",
+            "Energitičen",
+            "Prijazen",
+            "Radoveden",
+            "Inteligenten",
+            "Včasih trmast"
+        ],
+        favoriteThings: [
+            "Tekanje za žogo",
+            "Crkljanje na kavču",
+            "Srečevanje novih ljudi",
+            "Sončenje",
+            "Dobrote in prigrizki",
+            "Dolgi sprehodi v naravi",
+            "Plavanje"
+        ],
+    }
+};
+
+export function getDogInfo(lang: string = 'sl'): DogInfo {
+    return dogInfo[lang] || dogInfo.sl;
+}

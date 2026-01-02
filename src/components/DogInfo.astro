@@ -25,10 +25,24 @@ const {
     birthDate,
 } = Astro.props;
 
+import { getLangFromUrl, useTranslations } from "../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
 const ageResult = birthDate ? calculateAge(birthDate) : null;
 
 const plural = (count: number, unit: string) => {
-    return `${count} ${unit}${count !== 1 ? "s" : ""}`;
+    // English rules
+    if (lang === 'en') {
+        return `${count} ${t(`dog.age.${unit}`)}${count !== 1 ? "s" : ""}`;
+    }
+    
+    // Slovenian specific pluralization rules
+    if (count === 1) return `1 ${t(`dog.age.${unit}`)}`;
+    if (count === 2) return `2 ${t(`dog.age.${unit}_2`)}`;
+    if (count >= 3 && count <= 4) return `${count} ${t(`dog.age.${unit}_3_4`)}`;
+    return `${count} ${t(`dog.age.${unit}s`)}`;
 };
 ---
 
@@ -66,14 +80,14 @@ const plural = (count: number, unit: string) => {
         </div>
 
         <div class="personality-section">
-            <h3>✨ Personality</h3>
+            <h3>✨ {t('dog.personality')}</h3>
             <div class="traits">
                 {personality.map((trait) => <span class="trait">{trait}</span>)}
             </div>
         </div>
 
         <div class="favorites-section">
-            <h3>🎾 Favorite Things</h3>
+            <h3>🎾 {t('dog.favorites')}</h3>
             <ul class="favorites">
                 {favoriteThings.map((item) => <li>{item}</li>)}
             </ul>

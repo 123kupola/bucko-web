@@ -1,22 +1,26 @@
 ---
 import type { DogInfo } from "../../data/dog";
 
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
 interface Props {
     dogInfo: DogInfo;
     photoCount: number;
 }
 
 const { dogInfo, photoCount } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 ---
 
 <section class="hero" id="hero">
     <div class="hero-content">
         <h1 class="hero-title">
-            Welcome to <span class="highlight">{dogInfo.name}'s</span> World
+            {t('hero.welcome')} <span class="highlight">{dogInfo.name}</span> {t('hero.world')}
         </h1>
         <p class="hero-subtitle">
-            Meet the most energetic dog who goes by both{" "}
-            <strong>{dogInfo.name}</strong> and{" "}
+            {t('hero.subtitle_prefix')}{" "}
+            <strong>{dogInfo.name}</strong> {t('hero.subtitle_suffix')}{" "}
             <strong>{dogInfo.nickname}</strong>
         </p>
         <div class="hero-animation" aria-hidden="true">
@@ -28,8 +32,8 @@ const { dogInfo, photoCount } = Astro.props;
                 </div>
             </div>
         </div>
-        <a href="/#gallery" class="photo-count" aria-label="Jump to featured photos gallery">
-            📸 Featuring {photoCount} carefully selected photos
+        <a href={`/${lang}/gallery`} class="photo-count" aria-label="Jump to featured photos gallery">
+            📸 {t('hero.photos_count', { count: photoCount })}
         </a>
     </div>
     <div class="hero-paws" aria-hidden="true">

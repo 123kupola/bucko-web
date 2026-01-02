@@ -6,9 +6,13 @@ interface Props {
     post: BlogPost;
 }
 
-const { post } = Astro.props;
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
-const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+const { post } = Astro.props;
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+
+const formattedDate = new Date(post.date).toLocaleDateString(lang === 'sl' ? 'sl-SI' : 'en-US', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -29,12 +33,12 @@ const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     )}
 
     <div class="post-content">
-        <time class="post-date" datetime={post.date} aria-label={`Published on ${formattedDate}`}>
+        <time class="post-date" datetime={post.date} aria-label={`${t('blog.published')} ${formattedDate}`}>
             📅 {formattedDate}
         </time>
 
         <h3 class="post-title">
-            <a href={`/blog/${post.id}`}>{post.title}</a>
+            <a href={`/${lang}/blog/${post.id}`}>{post.title}</a>
         </h3>
 
         <p class="post-excerpt">{post.excerpt}</p>

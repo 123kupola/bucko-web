@@ -2,6 +2,14 @@ import { defineConfig } from "astro/config";
 
 // https://astro.build/config
 export default defineConfig({
+  // Enable i18n
+  i18n: {
+    defaultLocale: "sl",
+    locales: ["sl", "en"],
+    routing: {
+      prefixDefaultLocale: false
+    }
+  },
   image: {
     service: {
       entrypoint: "astro/assets/services/sharp",

@@ -1,18 +1,43 @@
 ---
-import { siteTitle } from "../../utils/siteConfig";
+import { getLangFromUrl, useTranslations, languages } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 
 const navLinks = [
-    { href: "/#hero", label: "Home" },
-    { href: "/#about", label: "About" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/blog", label: "Blog" },
+    { href: lang === 'sl' ? '/#hero' : `/${lang}/#hero`, label: t('nav.home') },
+    { href: lang === 'sl' ? '/#about' : `/${lang}/#about`, label: t('nav.about') },
+    { href: lang === 'sl' ? '/gallery' : `/${lang}/gallery`, label: t('nav.gallery') },
+    { href: lang === 'sl' ? '/blog' : `/${lang}/blog`, label: t('nav.blog') },
 ];
+
+function getLocalizedPath(currentPath: string, targetLang: string) {
+    const segments = currentPath.split('/').filter(Boolean);
+    const hasLangPrefix = Object.keys(languages).includes(segments[0]);
+    if (hasLangPrefix) {
+        // If current path has language prefix (e.g. /en/blog)
+        if (targetLang === 'sl') {
+            // Remove prefix if target is default lang
+            segments.shift(); 
+        } else {
+            // Replace prefix otherwise
+            segments[0] = targetLang;
+        }
+    } else {
+        // If current path has no prefix (e.g. /blog)
+        if (targetLang !== 'sl') {
+            // Add prefix if target is not default lang
+            segments.unshift(targetLang);
+        }
+    }
+    return '/' + segments.join('/');
+}
 ---
 
 <header class="site-header">
     <nav class="main-nav" aria-label="Main navigation">
-        <a href="/" class="nav-logo" aria-label="Go to home">
-            🐕 <span>{siteTitle}</span>
+        <a href={lang === 'sl' ? '/' : `/${lang}/`} class="nav-logo" aria-label="Go to home">
+            🐕 <span>{t('nav.site_title')}</span>
         </a>
 
         <div class="nav-links">
@@ -21,12 +46,18 @@ const navLinks = [
                     <a
                         href={link.href}
                         class="nav-link"
-                        aria-label={`Jump to ${link.label.toLowerCase()} section`}
                     >
                         {link.label}
                     </a>
                 ))
             }
+             <div class="lang-switcher">
+                {Object.entries(languages).map(([l, label]) => (
+                    <a href={getLocalizedPath(Astro.url.pathname, l)} class={`lang-link ${l === lang ? 'active' : ''}`} aria-label={label} aria-current={l === lang ? 'page' : undefined}>
+                        {l.toUpperCase()}
+                    </a>
+                ))}
+            </div>
         </div>
 
         <button
@@ -46,12 +77,18 @@ const navLinks = [
                     <a
                         href={link.href}
                         class="mobile-nav-link"
-                        aria-label={`Jump to ${link.label.toLowerCase()} section`}
                     >
                         {link.label}
                     </a>
                 ))
             }
+            <div class="mobile-lang-switcher">
+                {Object.entries(languages).map(([l, label]) => (
+                     <a href={getLocalizedPath(Astro.url.pathname, l)} class={`mobile-lang-link ${l === lang ? 'active' : ''}`}>
+                        {label}
+                    </a>
+                ))}
+            </div>
         </div>
     </nav>
 </header>
@@ -100,6 +137,56 @@ const navLinks = [
         display: flex;
         gap: var(--spacing-md);
         align-items: center;
+    }
+
+    .lang-switcher {
+        display: flex;
+        gap: var(--spacing-xs);
+        margin-left: var(--spacing-sm);
+        border-left: 1px solid var(--color-border);
+        padding-left: var(--spacing-sm);
+    }
+
+    .lang-link {
+        text-decoration: none;
+        color: var(--color-text-light);
+        font-weight: var(--font-weight-bold);
+        font-size: var(--font-size-sm);
+        padding: 4px 8px;
+        border-radius: var(--radius-sm);
+        transition: all var(--transition-fast);
+    }
+
+    .lang-link:hover {
+        color: var(--color-primary);
+        background: var(--color-bg);
+    }
+
+    .lang-link.active {
+        color: var(--color-primary);
+        background: rgba(139, 69, 19, 0.1);
+    }
+
+    .mobile-lang-switcher {
+        display: flex;
+        justify-content: center;
+        gap: var(--spacing-md);
+        margin-top: var(--spacing-md);
+        padding-top: var(--spacing-md);
+        border-top: 1px solid var(--color-border-light);
+    }
+
+    .mobile-lang-link {
+        text-decoration: none;
+        color: var(--color-secondary);
+        font-weight: var(--font-weight-medium);
+        padding: var(--spacing-sm) var(--spacing-md);
+        border-radius: var(--radius-md);
+    }
+
+    .mobile-lang-link.active {
+        background: var(--color-primary);
+        color: white;
     }
 
     .nav-link {

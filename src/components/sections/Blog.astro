@@ -8,8 +8,13 @@ interface Props {
     hideHeader?: boolean;
 }
 
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const { showAll = false, limit = 3, hideHeader = false } = Astro.props;
-const posts = getSortedPosts(showAll ? undefined : limit);
+// @ts-ignore
+const posts = getSortedPosts(lang, showAll ? undefined : limit);
 const hasMorePosts = !showAll && posts.length >= limit;
 ---
 
@@ -22,10 +27,10 @@ const hasMorePosts = !showAll && posts.length >= limit;
                         <span class="base-icon">📄</span>
                         <span class="pen-icon">✍️</span>
                     </span>
-                    Bučkov blog
+                    {t('blog.title')}
                 </h2>
                 <p class="blog-description">
-                    Stories, adventures, and memorable moments with our beloved Bučko
+                    {t('blog.description')}
                 </p>
             </>
         )}
@@ -41,8 +46,8 @@ const hasMorePosts = !showAll && posts.length >= limit;
                 <div class="no-posts">
                     <div class="placeholder">
                         <div class="placeholder-icon">✍️</div>
-                        <h3>Coming Soon!</h3>
-                        <p>New blog posts will appear here soon!</p>
+                        <h3>{t('blog.soon_title')}</h3>
+                        <p>{t('blog.soon_desc')}</p>
                     </div>
                 </div>
             )
@@ -51,8 +56,8 @@ const hasMorePosts = !showAll && posts.length >= limit;
         {
             hasMorePosts && (
                 <div class="blog-footer">
-                    <a href="/blog" class="btn-primary">
-                        Read All Posts
+                    <a href={`/${lang}/blog`} class="btn-primary">
+                        {t('blog.read_all')}
                         <svg
                             width="20"
                             height="20"

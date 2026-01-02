@@ -1,19 +1,23 @@
 ---
 import { contactInfo } from '../../utils/siteConfig';
+import { getLangFromUrl, useTranslations } from '../../i18n/utils';
 
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
 const currentYear = new Date().getFullYear();
+
 const quickLinks = [
-    { href: "/", label: "Home" },
-    { href: "/#about", label: "About" },
-    { href: "/gallery", label: "Gallery" },
-    { href: "/blog", label: "Blog" },
+    { href: lang === 'sl' ? '/' : `/${lang}/`, label: t('nav.home') },
+    { href: lang === 'sl' ? '/#about' : `/${lang}/#about`, label: t('nav.about') },
+    { href: lang === 'sl' ? '/gallery' : `/${lang}/gallery`, label: t('nav.gallery') },
+    { href: lang === 'sl' ? '/blog' : `/${lang}/blog`, label: t('nav.blog') },
 ];
 ---
 
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-section">
-            <h3 class="footer-title">Contact Bucko</h3>
+            <h3 class="footer-title">{t('footer.contact')}</h3>
             <div class="contact-links">
                 <a
                     href={`mailto:${contactInfo.email}`}
@@ -47,7 +51,7 @@ const quickLinks = [
         </div>
 
         <div class="footer-section">
-            <h3 class="footer-title">Quick Links</h3>
+            <h3 class="footer-title">{t('footer.quick_links')}</h3>
             <ul class="footer-links">
                 {quickLinks.map(link => (
                     <li>
@@ -60,18 +64,17 @@ const quickLinks = [
         </div>
 
         <div class="footer-section">
-            <h3 class="footer-title">About</h3>
+            <h3 class="footer-title">{t('footer.about')}</h3>
             <p class="footer-description">
-                Bucko's World is a celebration of Bučko, a loving American Bully.
-                Explore photos, stories, and adventures of the most wonderful dog!
+                {t('footer.description')}
             </p>
         </div>
     </div>
 
     <div class="footer-bottom">
         <p>
-            &copy; {currentYear} Bucko's World. All rights reserved.
-            <span class="heart">❤️</span> Made with love for Bucko
+            &copy; {currentYear} Valerija & Bučko. {t('footer.rights')}
+            <span class="heart">❤️</span> {t('footer.made_with')}
         </p>
     </div>
 </footer>

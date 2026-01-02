@@ -1,12 +1,12 @@
 ---
-import Layout from "../../layouts/Layout.astro";
-import BlogPost from "../../components/blog/BlogPost.astro";
-import { blogPosts, getPostById } from "../../data/blog";
-import { getLangFromUrl, useTranslations } from "../../i18n/utils";
+import Layout from "../../../layouts/Layout.astro";
+import BlogPost from "../../../components/blog/BlogPost.astro";
+import { blogPosts, getPostById } from "../../../data/blog";
+import { getLangFromUrl, useTranslations } from "../../../i18n/utils";
 
 export function getStaticPaths() {
     return blogPosts
-        .filter(post => post.lang === 'sl')
+        .filter(post => post.lang === 'en')
         .map((post) => ({
             params: { id: post.id },
         }));
@@ -20,7 +20,7 @@ if (!post) {
     return Astro.redirect("/404");
 }
 
-const pageTitle = `${post.title} - Bučkov Blog`;
+const pageTitle = `${post.title} - Bucko's Blog`;
 ---
 
 <Layout title={pageTitle} description={post.excerpt}>

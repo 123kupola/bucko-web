@@ -1,16 +1,16 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import { getDogInfo } from "../data/dog";
-import { allPhotos } from "../data/photos";
-import PhotoGallery from "../components/PhotoGallery.astro";
-import { getLangFromUrl, useTranslations } from "../i18n/utils";
+import Layout from "../../layouts/Layout.astro";
+import { getDogInfo } from "../../data/dog";
+import { allPhotos } from "../../data/photos";
+import PhotoGallery from "../../components/PhotoGallery.astro";
+import { getLangFromUrl, useTranslations } from "../../i18n/utils";
 
 const lang = getLangFromUrl(Astro.url);
 const t = useTranslations(lang);
 const dogInfo = getDogInfo(lang);
 
-const pageTitle = `${dogInfo.name} - Celotna zbirka fotografij - ${allPhotos.length} fotografij`;
-const pageDescription = `Oglejte si celotno zbirko ${allPhotos.length} fotografij ${dogInfo.name}a (${dogInfo.nickname}). Od pustolovščin v parku do lenobnih popoldnevov, oglejte si vse ujete dragocene trenutke!`;
+const pageTitle = `${dogInfo.name}'s Full Photo Collection - ${allPhotos.length} Photos`;
+const pageDescription = `Browse the complete collection of ${allPhotos.length} photos of ${dogInfo.name} (${dogInfo.nickname}). From park adventures to lazy afternoons, see all the precious moments captured!`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -18,10 +18,10 @@ const pageDescription = `Oglejte si celotno zbirko ${allPhotos.length} fotografi
         <header class="gallery-header">
             <div class="container gallery-header-content">
                 <h1 class="page-title">
-                    <span class="highlight">{dogInfo.name}</span> - Zbirka fotografij
+                    <span class="highlight">{dogInfo.name}'s</span> Full Photo Collection
                 </h1>
                 <p class="page-subtitle">
-                    Ujeti trenutki z {dogInfo.name}om.
+                    Enjoying every moment with {dogInfo.name}.
                 </p>
             </div>
             <div class="hero-paws" aria-hidden="true">
@@ -36,13 +36,13 @@ const pageDescription = `Oglejte si celotno zbirko ${allPhotos.length} fotografi
         <section class="gallery-section">
             <PhotoGallery
                 photos={allPhotos}
-                title="Ujeti spomini"
+                title="Memories Captured"
             />
         </section>
 
         <section class="cta-section">
             <div class="container">
-                <a href="/blog" class="btn btn-primary">Preberi {dogInfo.name}ov Blog</a>
+                <a href={`/${lang}/blog`} class="btn btn-primary">Read {dogInfo.name}'s Blog</a>
             </div>
         </section>
     </main>
