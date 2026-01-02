@@ -91,21 +91,22 @@ const hasMorePosts = !showAll && posts.length >= limit;
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: var(--spacing-sm);
+        gap: var(--spacing-md);
     }
 
     .animated-icon {
         position: relative;
-        display: inline-block;
-        width: 1em;
-        height: 1em;
-        vertical-align: middle;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 1.5em;
+        height: 1.5em;
         flex-shrink: 0;
     }
 
     .base-icon {
         font-size: 1.2em;
-        display: block;
+        line-height: 1;
     }
 
     .pen-icon {
