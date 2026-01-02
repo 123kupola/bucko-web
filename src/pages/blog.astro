@@ -9,7 +9,13 @@ const pageDescription =
 
 <Layout title={pageTitle} description={pageDescription}>
     <header class="blog-header">
-        <h1>📝 Bucko's Blog</h1>
+        <h1>
+            <span class="animated-icon">
+                <span class="base-icon">📝</span>
+                <span class="pen-icon">✍️</span>
+            </span>
+            Bučkov blog
+        </h1>
         <p>
             Stories, adventures, and memorable moments with our energetic Bučko
         </p>
@@ -33,6 +39,32 @@ const pageDescription =
         margin: 0 0 var(--spacing-md) 0;
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         line-height: var(--line-height-tight);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: var(--spacing-sm);
+    }
+
+    .animated-icon {
+        position: relative;
+        display: inline-flex;
+        font-size: 0.8em;
+    }
+
+    .pen-icon {
+        position: absolute;
+        top: -10%;
+        right: -10%;
+        animation: writing 2s ease-in-out infinite;
+        transform-origin: bottom left;
+    }
+
+    @keyframes writing {
+        0%, 100% { transform: translate(0, 0) rotate(0); }
+        20% { transform: translate(-2px, 2px) rotate(-10deg); }
+        40% { transform: translate(2px, -1px) rotate(5deg); }
+        60% { transform: translate(-1px, 2px) rotate(-5deg); }
+        80% { transform: translate(1px, -2px) rotate(10deg); }
     }
 
     .blog-header p {
