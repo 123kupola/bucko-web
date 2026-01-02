@@ -10,8 +10,8 @@ import MemoryLane from "../components/sections/MemoryLane.astro";
 import CollectionStats from "../components/sections/CollectionStats.astro";
 import BlogSection from "../components/sections/Blog.astro";
 
-const pageTitle = `Meet ${dogInfo.name} - ${dogInfo.nickname}'s Beautiful Photo Collection`;
-const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogInfo.nickname}), a ${dogInfo.age} ${dogInfo.breed} captured in these amazing photos. See ${featuredPhotos.length} carefully selected moments that show ${dogInfo.name}'s personality and spirit!`;
+const pageTitle = `Spoznajte ${dogInfo.name}a - ${dogInfo.nickname}jeva čudovita zbirka fotografij`;
+const pageDescription = `Odkrijte čudoviti svet ${dogInfo.name}a (${dogInfo.nickname}s), ${dogInfo.age} starega ${dogInfo.breed}a, ujetega v teh neverjetnih fotografijah. Oglejte si ${featuredPhotos.length} skrbno izbranih trenutkov!`;
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -33,11 +33,11 @@ const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogI
     <section id="gallery" class="section">
         <PhotoGallery
             photos={featuredPhotos}
-            title={`${dogInfo.name}'s Photo Gallery`}
+            title={`${dogInfo.name}jeva galerija fotografij`}
         />
         <div class="gallery-cta">
             <a href="/gallery" class="view-all-button">
-                <span>View All {allPhotos.length} Photos</span>
+                <span>Poglej vseh {allPhotos.length} fotografij</span>
                 <span class="icon">📸</span>
             </a>
         </div>

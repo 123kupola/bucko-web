@@ -4,7 +4,7 @@ import BlogSection from "../components/sections/Blog.astro";
 
 const pageTitle = "Bučkov blog - Zgodbe in dogodivščine";
 const pageDescription =
-    "Read stories, adventures, and memorable moments with Bučko. A collection of blog posts celebrating our beloved American Bully!";
+    "Preberite zgodbe, dogodivščine in nepozabne trenutke z Bučkom. Zbirka blog objav, ki slavijo našega ljubljenega Ameriškega Bullyja!";
 ---
 
 <Layout title={pageTitle} description={pageDescription}>
@@ -17,7 +17,7 @@ const pageDescription =
             <span class="highlight">Bučkov</span> blog
         </h1>
         <p>
-            Stories, adventures, and memorable moments with our energetic Bučko
+            Zgodbe, dogodivščine in nepozabni trenutki z našim energičnim Bučkom
         </p>
         <div class="hero-paws" aria-hidden="true">
             <span class="paw">🐾</span>
@@ -165,7 +165,7 @@ const pageDescription =
         padding: var(--spacing-3xl) var(--spacing-lg);
     }
 
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .blog-header {
             padding: var(--spacing-3xl) var(--spacing-md);
         }
@@ -183,7 +183,7 @@ const pageDescription =
         }
     }
 
-    @media (max-width: var(--breakpoint-sm)) {
+    @media (max-width: 640px) {
         .blog-header {
             padding: var(--spacing-2xl) var(--spacing-md);
         }

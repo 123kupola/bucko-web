@@ -1,4 +1,4 @@
-export const siteTitle = "Bucko's World";
+export const siteTitle = "Bučkov svet";
 
 export const contactInfo = {
     email: "bucko.buks@gmail.com",
@@ -8,9 +8,9 @@ export const contactInfo = {
 
 export const siteConfig = {
     title: siteTitle,
-    description: "Meet Bučko (Buks), the most wonderful American Bully with 86 beautiful photos capturing his personality and spirit!",
-    author: "Bucko's Human",
-    url: "https://bucko-world.com", // Update with actual URL
+    description: "Spoznaj Bučka (Buksa), čudovitega Ameriškega Bullyja, ujetega v 86 čudovitih fotografijah, ki kažejo njegovo osebnost in duha!",
+    author: "Bučkova ekipa",
+    url: "https://bucko-web.vercel.app",
     ogImage: "/images/bucko-buks-004.jpg",
     contact: contactInfo,
 };

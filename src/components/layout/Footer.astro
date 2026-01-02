@@ -3,9 +3,9 @@ import { contactInfo } from '../../utils/siteConfig';
 
 const currentYear = new Date().getFullYear();
 const quickLinks = [
-    { href: "/", label: "Home" },
-    { href: "/#about", label: "About" },
-    { href: "/gallery", label: "Gallery" },
+    { href: "/", label: "Domov" },
+    { href: "/#about", label: "O meni" },
+    { href: "/gallery", label: "Galerija" },
     { href: "/blog", label: "Blog" },
 ];
 ---
@@ -13,12 +13,12 @@ const quickLinks = [
 <footer class="site-footer">
     <div class="footer-content">
         <div class="footer-section">
-            <h3 class="footer-title">Contact Bucko</h3>
+            <h3 class="footer-title">Kontaktiraj Bučka</h3>
             <div class="contact-links">
                 <a
                     href={`mailto:${contactInfo.email}`}
                     class="contact-link"
-                    aria-label="Send email to Bucko"
+                    aria-label="Pošlji e-pošto Bučku"
                 >
                     <span class="contact-icon">📧</span>
                     <span>{contactInfo.email}</span>
@@ -28,7 +28,7 @@ const quickLinks = [
                     class="contact-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Visit Bucko's Facebook page"
+                    aria-label="Obišči Bučkovo Facebook stran"
                 >
                     <span class="contact-icon">📘</span>
                     <span>Facebook</span>
@@ -38,7 +38,7 @@ const quickLinks = [
                     class="contact-link"
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label="Visit Bucko's Twitter/X page"
+                    aria-label="Obišči Bučkovo Twitter/X stran"
                 >
                     <span class="contact-icon">🐦</span>
                     <span>Twitter/X</span>
@@ -47,7 +47,7 @@ const quickLinks = [
         </div>
 
         <div class="footer-section">
-            <h3 class="footer-title">Quick Links</h3>
+            <h3 class="footer-title">Hitre povezave</h3>
             <ul class="footer-links">
                 {quickLinks.map(link => (
                     <li>
@@ -60,18 +60,18 @@ const quickLinks = [
         </div>
 
         <div class="footer-section">
-            <h3 class="footer-title">About</h3>
+            <h3 class="footer-title">O strani</h3>
             <p class="footer-description">
-                Bucko's World is a celebration of Bučko, a loving American Bully.
-                Explore photos, stories, and adventures of the most wonderful dog!
+                Bučkov svet je posvečen Bučku, ljubečemu Ameriškemu Bullyju.
+                Raziščite fotografije, zgodbe in dogodivščine najbolj čudovitega psa!
             </p>
         </div>
     </div>
 
     <div class="footer-bottom">
         <p>
-            &copy; {currentYear} Bucko's World. All rights reserved.
-            <span class="heart">❤️</span> Made with love for Bucko
+            &copy; {currentYear} Bučkov svet. Vse pravice pridržane.
+            <span class="heart">❤️</span> Narejeno z ljubeznijo za Bučka
         </p>
     </div>
 </footer>
@@ -140,10 +140,6 @@ const quickLinks = [
         gap: var(--spacing-sm);
     }
 
-    .quick-link-item {
-        margin-bottom: var(--spacing-xs);
-    }
-
     .footer-link {
         color: white;
         text-decoration: none;
@@ -195,7 +191,7 @@ const quickLinks = [
         }
     }
 
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .footer-content {
             grid-template-columns: 1fr;
             gap: var(--spacing-xl);
@@ -203,7 +199,7 @@ const quickLinks = [
         }
     }
 
-    @media (max-width: var(--breakpoint-sm)) {
+    @media (max-width: 640px) {
         .footer-content {
             padding: var(--spacing-xl) var(--spacing-md);
         }

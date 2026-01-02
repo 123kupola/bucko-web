@@ -25,7 +25,7 @@ const hasMorePosts = !showAll && posts.length >= limit;
                     Bučkov blog
                 </h2>
                 <p class="blog-description">
-                    Stories, adventures, and memorable moments with our beloved Bučko
+                    Zgodbe, dogodivščine in nepozabni trenutki z našim ljubljenim Bučkom
                 </p>
             </>
         )}
@@ -41,8 +41,8 @@ const hasMorePosts = !showAll && posts.length >= limit;
                 <div class="no-posts">
                     <div class="placeholder">
                         <div class="placeholder-icon">✍️</div>
-                        <h3>Coming Soon!</h3>
-                        <p>New blog posts will appear here soon!</p>
+                        <h3>Kmalu na voljo!</h3>
+                        <p>Nove objave na blogu bodo kmalu vidne tukaj!</p>
                     </div>
                 </div>
             )
@@ -52,7 +52,7 @@ const hasMorePosts = !showAll && posts.length >= limit;
             hasMorePosts && (
                 <div class="blog-footer">
                     <a href="/blog" class="btn-primary">
-                        Read All Posts
+                        Preberi vse objave
                         <svg
                             width="20"
                             height="20"
@@ -219,7 +219,7 @@ const hasMorePosts = !showAll && posts.length >= limit;
         outline-offset: 2px;
     }
 
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .blog-grid {
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: var(--spacing-lg);
@@ -239,7 +239,7 @@ const hasMorePosts = !showAll && posts.length >= limit;
         }
     }
 
-    @media (max-width: var(--breakpoint-sm)) {
+    @media (max-width: 640px) {
         .blog-grid {
             grid-template-columns: 1fr;
             gap: var(--spacing-md);

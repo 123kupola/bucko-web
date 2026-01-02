@@ -12,11 +12,11 @@ const { dogInfo, photoCount } = Astro.props;
 <section class="hero" id="hero">
     <div class="hero-content">
         <h1 class="hero-title">
-            Welcome to <span class="highlight">{dogInfo.name}'s</span> World
+            Dobrodošli v <span class="highlight">{dogInfo.name}jevem</span> svetu
         </h1>
         <p class="hero-subtitle">
-            Meet the most energetic dog who goes by both{" "}
-            <strong>{dogInfo.name}</strong> and{" "}
+            Spoznajte najbolj energičnega psa, ki sliši na imeni{" "}
+            <strong>{dogInfo.name}</strong> in{" "}
             <strong>{dogInfo.nickname}</strong>
         </p>
         <div class="hero-animation" aria-hidden="true">
@@ -28,8 +28,8 @@ const { dogInfo, photoCount } = Astro.props;
                 </div>
             </div>
         </div>
-        <a href="/#gallery" class="photo-count" aria-label="Jump to featured photos gallery">
-            📸 Featuring {photoCount} carefully selected photos
+        <a href="/#gallery" class="photo-count" aria-label="Skoči na galerijo izbranih fotografij">
+            📸 Vsebuje {photoCount} skrbno izbranih fotografij
         </a>
     </div>
     <div class="hero-paws" aria-hidden="true">

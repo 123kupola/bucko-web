@@ -28,7 +28,25 @@ const {
 const ageResult = birthDate ? calculateAge(birthDate) : null;
 
 const plural = (count: number, unit: string) => {
-    return `${count} ${unit}${count !== 1 ? "s" : ""}`;
+    if (unit === "leto") {
+        if (count === 1) return `1 leto`;
+        if (count === 2) return `2 leti`;
+        if (count >= 3 && count <= 4) return `${count} leta`;
+        return `${count} let`;
+    }
+    if (unit === "mesec") {
+        if (count === 1) return `1 mesec`;
+        if (count === 2) return `2 meseca`;
+        if (count >= 3 && count <= 4) return `${count} mesece`;
+        return `${count} mesecev`;
+    }
+    if (unit === "dan") {
+        if (count === 1) return `1 dan`;
+        if (count === 2) return `2 dneva`;
+        if (count >= 3 && count <= 4) return `${count} dni`; // Simplified for simplicity in SI
+        return `${count} dni`;
+    }
+    return `${count} ${unit}`;
 };
 ---
 
@@ -56,9 +74,9 @@ const plural = (count: number, unit: string) => {
             {breed && <p class="breed">🐶 {breed}</p>}
             {ageResult ? (
                 <p class="age">
-                    📅 <span class="age-unit age-years">{plural(ageResult.years, "year")}</span> | 
-                    <span class="age-unit age-months">{plural(ageResult.months, "month")}</span> | 
-                    <span class="age-unit age-days">{plural(ageResult.days, "day")}</span>
+                    📅 <span class="age-unit age-years">{plural(ageResult.years, "leto")}</span> | 
+                    <span class="age-unit age-months">{plural(ageResult.months, "mesec")}</span> | 
+                    <span class="age-unit age-days">{plural(ageResult.days, "dan")}</span>
                 </p>
             ) : age && (
                 <p class="age">📅 {age}</p>
@@ -66,14 +84,14 @@ const plural = (count: number, unit: string) => {
         </div>
 
         <div class="personality-section">
-            <h3>✨ Personality</h3>
+            <h3>✨ Osebnost</h3>
             <div class="traits">
                 {personality.map((trait) => <span class="trait">{trait}</span>)}
             </div>
         </div>
 
         <div class="favorites-section">
-            <h3>🎾 Favorite Things</h3>
+            <h3>🎾 Priljubljene stvari</h3>
             <ul class="favorites">
                 {favoriteThings.map((item) => <li>{item}</li>)}
             </ul>

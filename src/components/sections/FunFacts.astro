@@ -8,32 +8,32 @@ const { dogName = "Bucko" } = Astro.props;
 const facts = [
     {
         icon: "🎾",
-        title: "Favorite Toy",
+        title: "Priljubljena igrača",
         description:
-            "Loves playing with tennis ball and will play fetch for hours!",
+            "Obožuje igro s teniško žogico in prinašanje ure in ure!",
     },
     {
         icon: "🌟",
-        title: "Special Skill",
-        description: "Can shake hands and give high-fives!",
+        title: "Posebna veščina",
+        description: "Zna dati taco in 'high-five'!",
     },
     {
         icon: "🎵",
-        title: "Music Lover",
-        description: "Enjoys listening to classical music while relaxing.",
+        title: "Ljubitelj glasbe",
+        description: "Uživa v poslušanju klasične glasbe med sproščanjem.",
     },
     {
         icon: "🍖",
-        title: "Favorite Snack",
+        title: "Najljubši prigrizek",
         description:
-            "Absolutely loves coconut butter and will do anything for it!",
+            "Obožuje kokosovo maslo in bi naredil vse zanj!",
     },
 ];
 ---
 
 <section class="fun-facts">
     <div class="facts-container">
-        <h2 class="facts-title">Fun Facts About {dogName}</h2>
+        <h2 class="facts-title">Zanimivosti o {dogName}</h2>
         <div class="facts-grid" role="list">
             {
                 facts.map((fact, index) => (

@@ -7,8 +7,15 @@ interface Props {
     title?: string;
 }
 
-const { photos = [], title = "Photo Gallery" } = Astro.props;
+const { photos = [], title = "Galerija fotografij" } = Astro.props;
 const totalPhotos = photos.length;
+
+const getPhotoText = (count: number) => {
+    if (count === 1) return "fotografija";
+    if (count === 2) return "fotografiji";
+    if (count >= 3 && count <= 4) return "fotografije";
+    return "fotografij";
+};
 ---
 
 <div class="photo-gallery">
@@ -47,8 +54,8 @@ const totalPhotos = photos.length;
             <div class="no-photos">
                 <div class="placeholder">
                     <div class="placeholder-icon">📷</div>
-                    <h3>No photos yet</h3>
-                    <p>Add photos to see the gallery!</p>
+                    <h3>Ni še fotografij</h3>
+                    <p>Dodaj fotografije, da vidiš galerijo!</p>
                 </div>
             </div>
         )
@@ -56,7 +63,7 @@ const totalPhotos = photos.length;
 
     <div class="photo-count" aria-live="polite">
         {totalPhotos}
-        {totalPhotos === 1 ? "photo" : "photos"}
+        {getPhotoText(totalPhotos)}
     </div>
 </div>
 
@@ -66,13 +73,13 @@ const totalPhotos = photos.length;
     id="lightbox"
     role="dialog"
     aria-modal="true"
-    aria-label="Photo viewer"
+    aria-label="Pregledovalnik fotografij"
     hidden
 >
     <div class="lightbox-backdrop"></div>
     <div class="lightbox-content">
-        <button class="close-btn" aria-label="Close lightbox" type="button">
-            <span class="sr-only">Close</span>
+        <button class="close-btn" aria-label="Zapri" type="button">
+            <span class="sr-only">Zapri</span>
             <svg
                 width="24"
                 height="24"
@@ -104,7 +111,7 @@ const totalPhotos = photos.length;
 
         <button
             class="nav-btn prev-btn"
-            aria-label="Previous photo"
+            aria-label="Prejšnja fotografija"
             type="button"
             disabled
         >
@@ -122,7 +129,7 @@ const totalPhotos = photos.length;
 
         <button
             class="nav-btn next-btn"
-            aria-label="Next photo"
+            aria-label="Naslednja fotografija"
             type="button"
             disabled
         >

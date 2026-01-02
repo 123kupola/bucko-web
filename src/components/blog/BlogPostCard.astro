@@ -8,7 +8,7 @@ interface Props {
 
 const { post } = Astro.props;
 
-const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
+const formattedDate = new Date(post.date).toLocaleDateString('sl-SI', {
     year: 'numeric',
     month: 'long',
     day: 'numeric'
@@ -29,7 +29,7 @@ const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
     )}
 
     <div class="post-content">
-        <time class="post-date" datetime={post.date} aria-label={`Published on ${formattedDate}`}>
+        <time class="post-date" datetime={post.date} aria-label={`Objavljeno ${formattedDate}`}>
             📅 {formattedDate}
         </time>
 
@@ -155,7 +155,7 @@ const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
         transform: translateY(-1px);
     }
 
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .post-content {
             padding: var(--spacing-lg);
         }
@@ -169,7 +169,7 @@ const formattedDate = new Date(post.date).toLocaleDateString('en-US', {
         }
     }
 
-    @media (max-width: var(--breakpoint-sm)) {
+    @media (max-width: 640px) {
         .post-image {
             aspect-ratio: 16 / 9;
         }

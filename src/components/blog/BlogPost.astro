@@ -8,7 +8,7 @@ interface Props {
 
 const { post } = Astro.props;
 
-const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
+const formattedDate = new Date(post.date).toLocaleDateString("sl-SI", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -54,7 +54,7 @@ const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2">
                 <path d="M11 15l-5-5 5-5" />
             </svg>
-            Back to Blog
+            Nazaj na blog
         </a>
     </footer>
 </article>
@@ -155,7 +155,7 @@ const formattedDate = new Date(post.date).toLocaleDateString("en-US", {
         transform: translateX(-5px);
     }
 
-    @media (max-width: var(--breakpoint-md)) {
+    @media (max-width: 768px) {
         .blog-post {
             padding: var(--spacing-xl);
             border-radius: 0;
