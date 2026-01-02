@@ -28,9 +28,9 @@ const { dogInfo, photoCount } = Astro.props;
                 </div>
             </div>
         </div>
-        <div class="photo-count">
+        <a href="/#gallery" class="photo-count" aria-label="Jump to featured photos gallery">
             📸 Featuring {photoCount} carefully selected photos
-        </div>
+        </a>
     </div>
     <div class="hero-paws" aria-hidden="true">
         <span class="paw">🐾</span>
@@ -230,6 +230,17 @@ const { dogInfo, photoCount } = Astro.props;
         display: inline-block;
         backdrop-filter: blur(10px);
         font-weight: var(--font-weight-medium);
+        text-decoration: none;
+        color: white;
+        transition: all 0.3s ease;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .photo-count:hover {
+        background: rgba(255, 255, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        color: var(--color-accent);
     }
 
     .hero-paws {
