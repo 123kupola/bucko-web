@@ -35,6 +35,12 @@ const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogI
             photos={featuredPhotos}
             title={`${dogInfo.name}'s Photo Gallery`}
         />
+        <div class="gallery-cta">
+            <a href="/gallery" class="view-all-button">
+                <span>View All {allPhotos.length} Photos</span>
+                <span class="icon">📸</span>
+            </a>
+        </div>
     </section>
 
     <FunFacts dogName={dogInfo.name} />
@@ -47,5 +53,35 @@ const pageDescription = `Discover the wonderful world of ${dogInfo.name} (${dogI
 <style>
     .section {
         scroll-margin-top: calc(var(--spacing-4xl) + var(--spacing-lg));
+    }
+
+    .gallery-cta {
+        display: flex;
+        justify-content: center;
+        margin-top: var(--spacing-2xl);
+    }
+
+    .view-all-button {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--spacing-sm);
+        padding: var(--spacing-md) var(--spacing-2xl);
+        background: linear-gradient(135deg, var(--color-primary), var(--color-primary-dark));
+        color: white;
+        text-decoration: none;
+        border-radius: var(--radius-full);
+        font-weight: var(--font-weight-bold);
+        transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 15px rgba(139, 69, 19, 0.3);
+    }
+
+    .view-all-button:hover {
+        transform: translateY(-3px) scale(1.05);
+        box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+    }
+
+    .view-all-button .icon {
+        font-size: 1.25rem;
     }
 </style>
