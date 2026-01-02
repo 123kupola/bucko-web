@@ -1,3 +1,16 @@
+import type { ImageMetadata } from "astro";
+
+const images = import.meta.glob<{ default: ImageMetadata }>("/src/assets/images/*.jpg", { eager: true });
+
+function getImagePath(src: string) {
+    const filename = src.split("/").pop();
+    const path = `/src/assets/images/${filename}`;
+    if (images[path]) {
+        return images[path].default;
+    }
+    return src;
+}
+
 export interface BlogPost {
     id: string;
     title: string;
@@ -6,7 +19,7 @@ export interface BlogPost {
     date: string;
     author?: string;
     tags?: string[];
-    featuredImage?: string;
+    featuredImage?: any;
 }
 
 export const blogPosts: BlogPost[] = [
@@ -26,7 +39,7 @@ export const blogPosts: BlogPost[] = [
         date: "2024-01-15",
         author: "Bucko's Human",
         tags: ["adventure", "park", "firsts"],
-        featuredImage: "/images/bucko-buks-006.jpg",
+        featuredImage: getImagePath("/images/bucko-buks-006.jpg"),
     },
     {
         id: "learning-new-tricks",
@@ -44,7 +57,7 @@ export const blogPosts: BlogPost[] = [
         date: "2024-01-10",
         author: "Bucko's Human",
         tags: ["training", "tricks", "learning"],
-        featuredImage: "/images/bucko-buks-042.jpg",
+        featuredImage: getImagePath("/images/bucko-buks-042.jpg"),
     },
     {
         id: "the-perfect-cuddle-buddy",
@@ -62,7 +75,7 @@ export const blogPosts: BlogPost[] = [
         date: "2024-01-05",
         author: "Bucko's Human",
         tags: ["bonding", "relaxation", "love"],
-        featuredImage: "/images/bucko-buks-009.jpg",
+        featuredImage: getImagePath("/images/bucko-buks-009.jpg"),
     },
 ];
 

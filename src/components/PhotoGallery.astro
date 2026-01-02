@@ -90,7 +90,7 @@ const totalPhotos = photos.length;
             <img
                 class="lightbox-image"
                 id="lightbox-image"
-                src={photos.length > 0 ? photos[0].src : ""}
+                src={photos.length > 0 ? (typeof photos[0].src === 'string' ? photos[0].src : photos[0].src.src) : ""}
                 alt={photos.length > 0 ? photos[0].alt : ""}
             />
         </div>
@@ -501,8 +501,9 @@ const totalPhotos = photos.length;
         if (!lightboxImage) return;
 
         const photo = photos[currentPhotoIndex];
+        const src = typeof photo.src === 'string' ? photo.src : photo.src.src;
         
-        lightboxImage.src = photo.src;
+        lightboxImage.src = src;
         lightboxImage.alt = photo.alt;
 
         if (lightboxCaption) {
