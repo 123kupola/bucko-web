@@ -12,7 +12,6 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
     <main class="gallery-page">
         <header class="gallery-header">
             <div class="container">
-                <a href="/" class="back-link">← Back to Home</a>
                 <h1 class="page-title">Full Photo Collection</h1>
                 <p class="page-subtitle">
                     Enjoying every moment with {dogInfo.name}. Total: {allPhotos.length} photos.
@@ -54,23 +53,11 @@ const pageDescription = `Browse the complete collection of ${allPhotos.length} p
         padding: 0 var(--spacing-lg);
     }
 
-    .back-link {
-        color: var(--color-accent);
-        text-decoration: none;
-        font-weight: var(--font-weight-semibold);
-        display: inline-block;
-        margin-bottom: var(--spacing-md);
-        transition: transform 0.2s ease;
-    }
-
-    .back-link:hover {
-        transform: translateX(-5px);
-    }
-
     .page-title {
         font-size: var(--font-size-4xl);
         font-weight: var(--font-weight-extrabold);
         margin-bottom: var(--spacing-sm);
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
     }
 
     .page-subtitle {
