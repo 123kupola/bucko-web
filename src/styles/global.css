@@ -17,6 +17,7 @@ html {
     color: var(--color-text);
     background-color: var(--color-bg);
     scroll-behavior: smooth;
+    scroll-padding-top: 80px; /* Offset for sticky header */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeLegibility;

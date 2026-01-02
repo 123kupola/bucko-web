@@ -43,21 +43,22 @@ const { dogInfo, photoCount } = Astro.props;
 
 <style>
     .hero {
-        background: linear-gradient(
-            135deg,
-            var(--color-primary) 0%,
-            var(--color-primary-light) 100%
-        );
-        color: white;
-        padding: var(--spacing-4xl) var(--spacing-lg);
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-        min-height: 500px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+    background: linear-gradient(
+        135deg,
+        var(--color-primary) 0%,
+        var(--color-primary-light) 100%
+    );
+    color: white;
+    padding: var(--spacing-5xl) var(--spacing-lg);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom-left-radius: 60px 30px;
+    border-bottom-right-radius: 60px 30px;
+}
 
     .hero::before {
         content: "";
